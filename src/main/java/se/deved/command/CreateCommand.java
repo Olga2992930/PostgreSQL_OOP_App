@@ -32,11 +32,6 @@ public class CreateCommand extends Command {
         scanner.nextLine();
         System.out.print("Ange datum (yyyy-mm-dd): ");
         String dateString = scanner.nextLine();
-        //Date datum = StringToDate.parseString(dateString);
-        //if (datum == null) {
-            //System.out.println("Fel datumformat. Försök igen.");
-            //return;
-        //}
         Date datum;
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,14 +39,10 @@ public class CreateCommand extends Command {
             java.util.Date javaDate = dateFormat.parse(dateString);
             datum = new Date(javaDate.getTime());
         } catch (ParseException exception) {
-            System.out.println("Could not parse date. Did you enter the correct format?");
+            System.out.println("Fel datumformat. Försök igen.");
             return;
         }
-
-
-
-
-                try (PreparedStatement insertTransaction = Application.conn.prepareStatement("INSERT INTO transactionstable (beskrivning, belopp, datum) VALUES (?, ?, ?)")) {
+        try (PreparedStatement insertTransaction = Application.conn.prepareStatement("INSERT INTO transactionstable (beskrivning, belopp, datum) VALUES (?, ?, ?)")) {
 
         insertTransaction.setString(1, beskrivning);
         insertTransaction.setInt(2, belopp);
