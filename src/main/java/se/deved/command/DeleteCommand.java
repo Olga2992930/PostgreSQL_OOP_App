@@ -15,17 +15,19 @@ public class DeleteCommand extends Command {
         Scanner scanner = new Scanner(System.in);
 
         try (Statement selectStatement = Application.conn.createStatement()) {
-            try (ResultSet result = selectStatement.executeQuery("SELECT * FROM transactionstable")) {
+            try (ResultSet result = selectStatement.executeQuery("SELECT * FROM financetable")) {
                 System.out.println("Här är alla transaktioner: ");
                 while (result.next()) {
-                    //displayTodo(result);
                     int id = result.getInt("id");
                     String beskrivning = result.getString("beskrivning");
                     int belopp = result.getInt("belopp");
                     Date datum = result.getDate("datum");
+                    boolean completed =result.getBoolean("completed");
+                   // boolean completed = result.getBoolean("completed");
                     System.out.println("- (" + id + ") " + beskrivning);
                     System.out.println("  Belopp: " + belopp);
                     System.out.println("  Datum: " + datum);
+                    //System.out.println("  Completed: " + (completed ? "Yes" : "No"));
                 }
             }
         } catch (SQLException exception) {
@@ -33,11 +35,11 @@ public class DeleteCommand extends Command {
             return;
         }
 
-        System.out.print("Ange transaktionsnumret att ta bort: ");
+        System.out.print("Ange transaktionsnummer att ta bort: ");
         int numret = scanner.nextInt();
         scanner.nextLine();
 
-        try (PreparedStatement deleteStatement = Application.conn.prepareStatement("DELETE FROM transactionstable WHERE id = ?")) {
+        try (PreparedStatement deleteStatement = Application.conn.prepareStatement("DELETE FROM financetable WHERE id = ?")) {
             deleteStatement.setInt(1, numret);
 
             if (deleteStatement.executeUpdate() == 0) {
@@ -49,7 +51,7 @@ public class DeleteCommand extends Command {
             return;
         }
 
-        System.out.println("Deleted todo from database.");
+        System.out.println("Transaktionen har tagits bort.");
 
         //TransactionsManager manager = new TransactionsManager();
         //manager.visaAllaTransactioner();

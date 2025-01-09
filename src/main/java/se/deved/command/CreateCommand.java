@@ -42,7 +42,7 @@ public class CreateCommand extends Command {
             System.out.println("Fel datumformat. Försök igen.");
             return;
         }
-        try (PreparedStatement insertTransaction = Application.conn.prepareStatement("INSERT INTO transactionstable (beskrivning, belopp, datum) VALUES (?, ?, ?)")) {
+        try (PreparedStatement insertTransaction = Application.conn.prepareStatement("INSERT INTO financetable (beskrivning, belopp, datum) VALUES (?, ?, ?)")) {
 
         insertTransaction.setString(1, beskrivning);
         insertTransaction.setInt(2, belopp);
@@ -57,24 +57,5 @@ public class CreateCommand extends Command {
             return;
         }
 
-
-
-
-
-
-
-        //Transaction transaction = new Transaction(beskrivning, belopp, datum);
-        
-
-        //manager.läggTillTransaction(beskrivning, belopp, datum);
-        //System.out.println("______________________________________________________________");
-        //System.out.println("Kör vidare! ('create'/'balance'/'delete'/'expenses'/'income'/'help'/'stop')");
-        //try {
-            //application.getTransactionManager().save(transaction);
-            //System.out.println("Sparade transaction '" + transaction.beskrivning + "'.");
-        //} catch (Exception exception) {
-            //exception.printStackTrace();
-            //System.out.println("Kunde inte spara transaction. Försök igen.");
-        //}
     }
-}
+    }

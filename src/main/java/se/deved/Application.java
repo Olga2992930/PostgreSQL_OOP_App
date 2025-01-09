@@ -60,8 +60,9 @@ public class Application {
 
         try {
             Statement createTablesStatement = conn.createStatement();
-            createTablesStatement.execute("CREATE TABLE IF NOT EXISTS transactionstable (" +
+            createTablesStatement.execute("CREATE TABLE IF NOT EXISTS financetable (" +
                     "id SERIAL PRIMARY KEY," +
+                    "completed BOOLEAN NOT NULL DEFAULT false,"+
                     "beskrivning TEXT NOT NULL," +
                     "belopp INT, " +
                     "datum DATE)");
@@ -69,6 +70,8 @@ public class Application {
             exception.printStackTrace();
             return;
         }
+
+
 
         Application application = new Application();
         Scanner scanner = new Scanner(System.in);

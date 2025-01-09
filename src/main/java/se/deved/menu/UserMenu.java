@@ -7,6 +7,7 @@ import se.deved.command.ExpensesCommand;
 import se.deved.command.IncomeCommand;
 import se.deved.command.StopCommand;
 import se.deved.command.BalanceCommand;
+import se.deved.command.CompleteCommand;
 
 public class UserMenu extends Menu {
 
@@ -18,6 +19,7 @@ public class UserMenu extends Menu {
         registerCommand(new IncomeCommand(application));
         registerCommand(new ExpensesCommand(application));
         registerCommand(new StopCommand(application));
+        registerCommand(new CompleteCommand(application));
     }
 
     @Override
