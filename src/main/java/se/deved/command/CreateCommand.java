@@ -4,13 +4,9 @@ import java.util.Scanner;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-//import java.util.Date;
 import java.sql.*;
 
 import se.deved.Application;
-import se.deved.Transaction;
-import se.deved.TransactionsManager;
-import se.deved.utility.StringToDate;
 
 public class CreateCommand extends Command {
 
@@ -21,8 +17,6 @@ public class CreateCommand extends Command {
     @Override
     public void execute(String[] commandArgs) {
 
-
-        TransactionsManager manager = new TransactionsManager();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Beskriv transaktionen: ");
         String beskrivning = scanner.nextLine();
@@ -44,9 +38,9 @@ public class CreateCommand extends Command {
         }
         try (PreparedStatement insertTransaction = Application.conn.prepareStatement("INSERT INTO financetable (beskrivning, belopp, datum) VALUES (?, ?, ?)")) {
 
-        insertTransaction.setString(1, beskrivning);
-        insertTransaction.setInt(2, belopp);
-        insertTransaction.setDate(3, datum);
+            insertTransaction.setString(1, beskrivning);
+            insertTransaction.setInt(2, belopp);
+            insertTransaction.setDate(3, datum);
 
             if (insertTransaction.executeUpdate() == 0) {
                 System.out.println("Nothing was inserted, perhaps there was a conflict?");
@@ -56,6 +50,6 @@ public class CreateCommand extends Command {
             System.out.println("Failed to save to database.");
             return;
         }
-
+        System.out.print("Du är klar med transaktionen!");
     }
-    }
+}

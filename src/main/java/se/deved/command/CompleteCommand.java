@@ -3,7 +3,6 @@ package se.deved.command;
 import java.util.Scanner;
 
 import se.deved.Application;
-import se.deved.TransactionsManager;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -26,7 +25,7 @@ public class CompleteCommand extends Command {
             updateStatement.setInt(1, numret);
 
             if (updateStatement.executeUpdate() == 0) {
-                System.out.println("There is no todo with id " + numret);
+                System.out.println("Finns ingen transaktion med  id " + numret);
                 return;
             }
         } catch (SQLException exception) {

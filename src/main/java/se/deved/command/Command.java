@@ -1,6 +1,7 @@
 package se.deved.command;
 
 import se.deved.Application;
+
 public abstract class Command {
 
     private String name;
